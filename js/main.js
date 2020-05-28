@@ -116,7 +116,12 @@ function update(data) {
 			return '#000';
 		})
 		.attr("opacity", function(d){
-			return lookup[d.Rating][d.Age]/maxCt;
+			ct = lookup[d.Rating][d.Age]
+			scaled = ct/maxCt;
+			console.log(ct,'/',maxCt,'=',scaled);
+			opacity = (scaled + 1) / 2;
+			console.log(opacity);
+			return opacity;
 		});
 	// TODO change for the mark you want to use e.g. rect, path, etc
 	//TODO change the attribs/style of your updating mark

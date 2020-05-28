@@ -2,21 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Headline or title</title>
+    <title>Whisky Quality vs. Age</title>
 
     <link rel="stylesheet" href="./css/main.css" />
+	<link rel="icon" href="favicon.ico">
   </head>
   <body>
     <div class="chart">
-      <h1>A headline of your insight</h1>
+      <h1>Are older whiskies better?</h1>
       <div class="description">
-        A short description of the chart. Usually what's on the y axis.
+        A visual representation comparing the stated age of 293 different whiskies to my personal rating of them.
       </div>
       <div id="chart"></div>
       <div class="chart-footer">
-        By <a href="https://johnguerra.co">John Alexis Guerra Gómez</a>.
+        By <a href="https://linkedin.com/in/mrkawa">Matt Kawa</a>.
         <br />
-        <strong>Source</strong>: <a href="">My data source</a>
+        <strong>Source</strong>: <a href="./data/whisky.csv">Personal Data Collection</a>
       </div>
     </div>
 
@@ -24,25 +25,11 @@
     <br />
 
     <div>
-      A longer description of your insights, your data, how to read the chart,
-      what to take from it etc.
-      <br />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-      perspiciatis deserunt rem officia quis modi at ipsum voluptate libero
-      eveniet officiis quia dolor accusamus, vitae earum neque. Nam, cumque
-      eligendi!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad,
-      modi a deserunt quia pariatur optio facilis accusantium eveniet expedita
-      vitae sed quos delectus cupiditate maxime consectetur sapiente nesciunt
-      corrupti provident? Lorem ipsum dolor sit amet consectetur adipisicing
-      elit. Impedit cum ad quas ipsum quo, labore eum, quaerat ullam,
-      repellendus accusamus quis aliquam rem atque dolores animi perferendis
-      nemo iusto ducimus. Iste ullam labore consequatur deleniti maiores nihil,
-      culpa dolores rem, facilis quisquam, sed exercitationem porro. Impedit
-      sapiente labore totam, iste dolor eaque nostrum accusamus adipisci
-      consequatur reprehenderit hic eum minus! Mollitia quia odit eligendi!
-      Voluptates asperiores numquam pariatur. Ipsa eligendi nam tenetur, nisi
-      voluptatem vel quibusdam fuga? Voluptatibus dolor, fuga non quod quos
-      optio ratione, eaque eius, debitis natus assumenda.
+      The data does not seem to indicate a meaningful relationship between stated age and rating.  Of course the data is highly subjective in nature and any insights drawn are indicative only of my personal preferences.  
+      <br /><br />
+      The data was collected gradually over the course of nearly 6 years, during which time I assigned a rating in increments of 0.5 on a scale of 0.5 to 5 to every unique whisky I tasted.  The  entire dataset is 757 records in length, however most whiskies in the set do not state the age of the product on the label.  
+	  <br /><br />
+	  Although it is often possible to make an educated guess as to the actual age of the contents of a No Age Statement (NAS) bottle based on context, laws, public statements, and conjecture, the only way to be legally certain of the age of a whisky is for it to be printed on the bottle.  For the purposes of this visualization, most NAS whiskies were omitted, unless the age is clearly advertised in their marketing materials or legally required to be at least a certain age (e.g. Bottled in Bond).  
     </div>
 
     <br />
@@ -50,11 +37,6 @@
     <br />
 
     <h2>Problem Abstraction</h2>
-    <div>
-      Use Tamara Munzner's framework to Abstract your problem (what, why, how)
-    </div>
-
-    <br />
     <table>
       <thead>
         <tr>
@@ -65,25 +47,53 @@
         <tr>
           <td>What</td>
           <td>
-            What type of data do we have? Dataset type (table, networks, etc).
-            Attributes types (Categorical, Ordered) From where?
+			<ul>
+				<li>Comma-separated data table as input.</li>
+				<li>Contains categorical data (e.g. type of whisky) as well as nominal (e.g. age) and ordinal (e.g. rating) numerical data.</li>
+				<li>Source of data is self-collection.</li>
+			</ul>
           </td>
         </tr>
         <tr>
           <td>Why</td>
-          <td>Visual tasks to perform (action + target)</td>
+          <td>
+			<ul>
+				<li>To better understand the releationship (or lack thereof) between the amount of time a whisky is aged and how much I enjoy it drinking it.</li>
+			</ul>
+		  </td>
         </tr>
         <tr>
           <td>How</td>
-          <td>Mark (point, area, line) and channels (x, y, color, etc)</td>
+          <td>
+			  <ul>
+				<li>The location of the marks represents Age (x-axis) and Rating (y-axis).</li>
+				<li>
+				The data points are color-coded by type of whisky as follows:
+					<ul>
+						<li>Orange: Scotch</li>
+						<li>Red: Bourbon/American</li>
+						<li>Rye: Pink</li>
+						<li>Green: Irish</li>
+						<li>Yellow: Japanese</li>
+						<li>Canadian: Gray</li>
+						<li>World (Other): Blue</li>
+						<li>Flavored: Purple</li>
+					</ul>
+				</li>
+				<li>For extra clarity, the size <span style="font-style: italic">as well as opacity</span> of the points are determined by the number of records occupying that point on the x-y plane.</li>
+			  </ul></td>
         </tr>
         <tr>
-          <td>Example insight 1</td>
-          <td>...</td>
+          <td>Insight: Relationship</td>
+          <td>There does not seem to be any strong correlation between age and perceived quality.</td>
         </tr>
         <tr>
-          <td>Example insight 2</td>
-          <td>...</td>
+          <td>Insight: Distribution</td>
+          <td>There appears to be a somewhat normal distribution of ratings.  Perhaps another form of visualization could help clarify further.</td>
+        </tr>
+        <tr>
+          <td>Insight: Types</td>
+          <td>There seem to be no meaningful differences between the different types of whisky and their age-quality correlations (or lack thereof).</td>
         </tr>
       </tbody>
     </table>
