@@ -32,7 +32,7 @@ function update(data) {
 	// TODO Update scale domains based on your data variables
 	var maxAge = d3.max(data, function(d){
 		return +d.Age;
-	})
+	});
 	x.domain([0, maxAge]);
 	y.domain([0, 5]);
 
@@ -73,6 +73,18 @@ function update(data) {
 		//console.log('Rating:', d.Rating, 'Age:', d.Age, '|', lookup[d.Rating][d.Age]);
 	});
 	//console.log(lookup);
+	
+	var maxCt = 0;
+	for (var key in lookup){
+		sub = lookup[key];
+		for (var subKey in sub){
+			if (key > 0 && subKey > 0){
+				if (sub[subKey] > maxCt){
+					maxCt = sub[subKey];
+				}
+			}
+		}
+	}
 
 	// Update
 	marks;
@@ -102,6 +114,9 @@ function update(data) {
 				case "Flavored": return "purple";
 			}
 			return '#000';
+		})
+		.attr("opacity", function(d){
+			return lookup[d.Rating][d.Age]/maxCt;
 		});
 	// TODO change for the mark you want to use e.g. rect, path, etc
 	//TODO change the attribs/style of your updating mark
