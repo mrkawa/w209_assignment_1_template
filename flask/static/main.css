@@ -1,0 +1,20 @@
+body {
+  margin: 30px;
+  font-family: sans-serif;
+}
+
+.description {
+  max-width: 800px;
+  font-weight: bold;
+  font-style: italic;
+}
+table,
+td {
+  border: 0.5px dashed #333;
+}
+
+.chart-footer {
+  font-style: italic;
+  font-size: 10pt;
+  color: #aaa;
+}

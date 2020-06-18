@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Whisky Quality vs. Age</title>
+
+		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+
+		<!--link rel="stylesheet" href="css/main.css" /-->
+	<link rel="icon" href="static/favicon.ico">
+	</head>
+	<body>
+		<div class="chart">
+			<h1>Are older whiskies better?</h1>
+			<div class="description">
+				A visual representation comparing the stated age of 293 different whiskies to my personal rating of them.
+			</div>
+			<div id="chart"></div>
+			<div id="filter">
+				Filter by type:
+				<input onclick="filter(this)" type="checkbox" id="scotch" name="scotch" value="Scotch">
+				<label style="background-color:hsl(45,50%,50%)" for="scotch">Scotch</label>
+				
+				<input onclick="filter(this)" type="checkbox" id="bourbon" name="bourbon" value="Bourbon">
+				<label style="background-color:hsl(0,50%,50%)" for="bourbon">Bourbon</label>
+				
+				<input onclick="filter(this)" type="checkbox" id="rye" name="rye" value="Rye">
+				<label style="background-color:hsl(300,50%,50%)" for="rye">Rye</label>
+							
+				<input onclick="filter(this)" type="checkbox" id="irish" name="irish" value="Irish">
+				<label style="background-color:hsl(120,50%,50%)" for="irish">Irish</label>
+
+				<input onclick="filter(this)" type="checkbox" id="japanese" name="japanese" value="Japanese">
+				<label style="background-color:hsl(240,50%,50%)" for="japanese">Japanese</label>
+			</div>
+			<div id="readout" class="readout"></div>
+			</br>
+			<div class="chart-footer">
+				By <a href="https://linkedin.com/in/mrkawa">Matt Kawa</a>.
+				<br />
+				<strong>Source</strong>: <a href="{{ url_for('static',filename='data/whisky.csv') }}">Personal Data Collection</a>
+			</div>
+		</div>
+		<br />
+		<h2>Data</h2>
+		<div>
+			The data does not seem to indicate a meaningful relationship between stated age and rating.	Of course the data is highly subjective in nature and any insights drawn are indicative only of my personal preferences.	
+			<br /><br />
+			The data was collected gradually over the course of nearly 6 years, during which time I assigned a rating in increments of 0.5 on a scale of 0.5 to 5 to every unique whisky I tasted.	The	entire dataset is 757 records in length, however most whiskies in the set do not state the age of the product on the label.	
+		<br /><br />
+		Note: Although it is often possible to make an educated guess as to the actual age of the contents of a No Age Statement (NAS) bottle based on context, laws, public statements, and conjecture, the only way to be legally certain of the age of a whisky is for it to be printed on the bottle.	For the purposes of this visualization, most NAS whiskies were omitted, unless the age is clearly advertised in their marketing materials or legally required to be at least a certain age (e.g. Bottled in Bond).	
+		</div>
+		
+		<br />
+		<h2>Interactions</h2>
+		<ul>
+			<li>There is a row of potential filters underneath the visualization that allows the user to subset the data and view only certain types of whisky.  By default, all of the filters are turned off and all the data is visualized.  Turning on any filters means that only the selected styles will be displayed.  If all filters are turned off, the visualization will once again repopulate with the full dataset, as this behavior provides the user far more utility than displaying an empty graph.</li>
+			<li>Additionally, mousing over a square on the heatmap will place or replace the text in the area beneath the visualization to indicate the coordinates (age and rating) of the cell under the cursor, as well as list all of the whiskies that meet those criteria and comprise the value of the cell.</li>
+		</ul>
+		<br />
+
+		<h2>Problem Abstraction</h2>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="2">Problem Abstraction</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>What</td>
+					<td>
+			<ul>
+				<li>Comma-separated data table as input.</li>
+				<li>Contains categorical data (e.g. type of whisky) as well as nominal (e.g. age) and ordinal (e.g. rating) numerical data.</li>
+				<li>Source of data is self-collection.</li>
+			</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>Why</td>
+					<td>
+			<ul>
+				<li>To better understand the releationship (or lack thereof) between the amount of time a whisky is aged and how much I enjoy it drinking it.</li>
+			</ul>
+			</td>
+				</tr>
+				<tr>
+					<td>How</td>
+					<td>
+				<ul>
+				<li>The location of the marks represents Age (x-axis) and Rating (y-axis).</li>
+				<li>
+				The data points are color-coded by according to the type of whisky that comprises the plurality of that point as follows:
+					<ul>
+						<li>Yellow: Scotch</li>
+						<li>Red: Bourbon</li>
+						<li>Purple: Rye</li>
+						<li>Green: Irish</li>
+						<li>Blue: Japanese</li>
+					</ul>
+				</li>
+				<li>The luminance of the points are determined by the number of records occupying that point on the x-y plane.  The darker (blacker) a point, the more whiskies meet those coordinates and the whiter, the fewer.</li>
+				</ul></td>
+				</tr>
+				<tr>
+					<td>Insight: Relationship</td>
+					<td>There does not seem to be any strong correlation between age and perceived quality.  Except that there seems to be a floor where that no age-stated whiskies fall below.</td>
+				</tr>
+				<tr>
+					<td>Insight: Style as it Relates to Age</td>
+					<td>For the most part, Scotch occupies the older (farther right) part of the graph more heavily than the others, which tend to occupy the younger space (with a few exceptions).</td>
+				</tr>
+				<tr>
+					<td>Insight: Style as it Relates to Quality</td>
+					<td>Scotches also tend to dominate the higher (higher-rated) portion of the graph, across all age ranges.  Bourbons reach up the next most frequently, ryes and Irish whiskies are fairly evenly distributed, while Japanese whiskies seem to be more narrowly limited and do not reach as high.</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<script src="https://d3js.org/d3.v4.js"></script>
+		<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+	</body>
+</html>
